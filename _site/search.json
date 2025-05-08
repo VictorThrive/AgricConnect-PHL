@@ -1,0 +1,79 @@
+[
+  {
+    "objectID": "documentation.html",
+    "href": "documentation.html",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "",
+    "text": "Access to affordable finance is one of the most pressing barriers limiting youth participation in agriculture in Nigeria. According to the EFInA 2020 survey, only 6% of youth aged 18–25 can access business loans. With agriculture employing about 35% of the workforce yet contributing less than 25% to GDP, it’s evident that underinvestment is a challenge.\nThis project aims to leverage data to bridge the finance gap and develop solutions that make agriculture more bankable and attractive for youth."
+  },
+  {
+    "objectID": "documentation.html#datasets-used",
+    "href": "documentation.html#datasets-used",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "3.1 Datasets Used",
+    "text": "3.1 Datasets Used\n\n\n\nDataset Name\nDescription\nSource\n\n\n\n\n[Dataset 1]\n[Brief Description]\n[Source/Link]\n\n\n[Dataset 2]\n[Brief Description]\n[Source/Link]"
+  },
+  {
+    "objectID": "documentation.html#data-collection-cleaning",
+    "href": "documentation.html#data-collection-cleaning",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "3.2 Data Collection & Cleaning",
+    "text": "3.2 Data Collection & Cleaning\n\nData imported from [source or format]\nMissing values handled using [method]\nOutliers and anomalies checked using [techniques]\nFeature engineering applied to variables like loan amount, repayment history, crop type, etc."
+  },
+  {
+    "objectID": "documentation.html#exploratory-data-analysis-eda",
+    "href": "documentation.html#exploratory-data-analysis-eda",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "3.3 Exploratory Data Analysis (EDA)",
+    "text": "3.3 Exploratory Data Analysis (EDA)\n\n# Example: Visualizing age distribution and access to finance\nlibrary(ggplot2)\n\nggplot(data, aes(x = Age, fill = HasLoanAccess)) +\n  geom_histogram(binwidth = 2) +\n  labs(title = \"Age Distribution and Access to Finance\", x = \"Age\", y = \"Count\")"
+  },
+  {
+    "objectID": "documentation.html#creditworthiness-indicator",
+    "href": "documentation.html#creditworthiness-indicator",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "4.1 Creditworthiness Indicator",
+    "text": "4.1 Creditworthiness Indicator\n\n# Example scoring or correlation heatmap\nlibrary(corrplot)\ncorr_matrix &lt;- cor(data[, c(\"LoanAmount\", \"RepaymentRate\", \"FarmIncome\", \"TrainingHours\")])\ncorrplot(corr_matrix, method = \"circle\")\n\nKey variables linked to creditworthiness:\nFarm size\nPrevious loan repayment record\nFarm income & expenses\nAccess to extension services or training"
+  },
+  {
+    "objectID": "documentation.html#visualization-dashboard-optional",
+    "href": "documentation.html#visualization-dashboard-optional",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "4.2 Visualization Dashboard (Optional)",
+    "text": "4.2 Visualization Dashboard (Optional)\n[Embed interactive visualizations using plotly or leaflet]"
+  },
+  {
+    "objectID": "documentation.html#model-design",
+    "href": "documentation.html#model-design",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "5.1 Model Design",
+    "text": "5.1 Model Design\n\n# Sample logistic regression for predicting loan repayment\nmodel &lt;- glm(RepaymentSuccess ~ Age + FarmSize + Training + Income, data = data, family = \"binomial\")\nsummary(model)"
+  },
+  {
+    "objectID": "documentation.html#model-performance",
+    "href": "documentation.html#model-performance",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "5.2 Model Performance",
+    "text": "5.2 Model Performance\nAccuracy: XX%\nAUC-ROC: XX%\nConfusion Matrix:\nTrue Positives: XX\nFalse Positives: XX\netc."
+  },
+  {
+    "objectID": "documentation.html#concept-overview",
+    "href": "documentation.html#concept-overview",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "6.1 Concept Overview",
+    "text": "6.1 Concept Overview\nWe propose a prototype app called “AgriFinanceConnect” which includes:\nA loan application portal tailored for young farmers.\nA farmer credit scorecard based on our model.\nA dashboard for lenders/investors to filter low-risk candidates."
+  },
+  {
+    "objectID": "documentation.html#prototype-features-bonus",
+    "href": "documentation.html#prototype-features-bonus",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "6.2 Prototype Features (Bonus)",
+    "text": "6.2 Prototype Features (Bonus)\nEducational Tips: “How to Improve Your Credit Score”\nSMS reminders for repayment & training modules\nLocation-based finance opportunities"
+  },
+  {
+    "objectID": "documentation.html#building-trust",
+    "href": "documentation.html#building-trust",
+    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "section": "6.3 Building Trust",
+    "text": "6.3 Building Trust\nOur solution builds trust by:\nProviding transparency through data-backed profiles\nReducing perceived risk for lenders using predictive models\nEmpowering farmers with knowledge and resources"
+  }
+]
