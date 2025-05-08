@@ -1,6 +1,6 @@
 ---
-title: "Access to Affordable Finance for Young Agripreneurs"
-subtitle: "to Build Youth-Led Agri-Businesses"
+title: "Reducing Post-Harvest Losses "
+subtitle: "Empowering Youth-Led Agri-Businesses"
 author: "Team Data Rangers"
 format: 
   html:
@@ -17,124 +17,177 @@ execute:
 
 # Introduction
 
-Access to affordable finance is one of the most pressing barriers limiting youth participation in agriculture in Nigeria. According to the EFInA 2020 survey, only **6%** of youth aged 18–25 can access business loans. With agriculture employing about **35%** of the workforce yet contributing less than **25%** to GDP, it's evident that underinvestment is a challenge.
+Post-harvest losses (PHL) are a critical barrier to food security, economic growth, and youth engagement in Nigeria’s agricultural sector. According to FMARD, **30–50%** of perishable produce is lost annually due to inadequate storage, poor logistics, and weak market systems. This amounts to nearly **\$9 billion in annual losses** (World Bank), equivalent to millions of missed meals and missed business opportunities.
 
-This project aims to leverage data to **bridge the finance gap** and develop solutions that make agriculture more **bankable and attractive** for youth.
+This project explores how **data-driven solutions** can be used to **predict, prevent, and reduce** these losses — turning agriculture into a viable and attractive sector for Nigeria’s youth.
 
 # Objective
 
-The core objective is to develop a **data-driven solution** that enables young agripreneurs to access affordable finance. Our goals include:
+To develop an intelligent system that:
 
-- Identifying characteristics that make young farmers creditworthy.
-- Predicting repayment likelihood and business success.
-- Proposing tools for financiers to evaluate and support youth in agriculture.
+-   Identifies **PHL risk factors** (crop type, region, season, method of handling).
+-   Predicts **high-loss periods or areas**.
+-   Proposes **smart solutions** for storage, distribution, and market access.
 
 # Data Strategy
 
 ## Datasets Used
 
-| Dataset Name | Description | Source |
-|--------------|-------------|--------|
-| [Dataset 1] | [Brief Description] | [Source/Link] |
-| [Dataset 2] | [Brief Description] | [Source/Link] |
+| Dataset Name                  | Description                                        | Source                                 |
+|-------------------------------|----------------------------------------------------|----------------------------------------|
+| NASS Crop Production Survey   | Production and storage patterns by crop            | National Bureau of Statistics          |
+| Climate Data                  | Regional rainfall and temperature patterns         | Nigerian Meteorological Agency (NiMet) |
+| FAO Post-Harvest Loss Surveys | Country-specific food loss reports                 | FAO & World Bank                       |
+| Custom Survey Data            | Losses by crop, region, storage & logistics method | Team-designed field survey             |
 
 ## Data Collection & Cleaning
 
-- Data imported from [source or format]
-- Missing values handled using [method]
-- Outliers and anomalies checked using [techniques]
-- Feature engineering applied to variables like loan amount, repayment history, crop type, etc.
+-   Data imported from \[source or format\]
+-   Surveyed farmers in 6 geopolitical zones
+-   Integrated geospatial data with market distance, road quality, and temperature
+-   Coded crop type, storage duration, and spoilage cause
+-   Cleaned nulls, standardized seasonal formats, and geotagged records
+-   Missing values handled using \[method\]
+-   Outliers and anomalies checked using \[techniques\]
+-   Feature engineering applied to variables like loan amount, repayment history, crop type, etc.
 
 ## Exploratory Data Analysis (EDA)
 
 ```{r}
-# Example: Visualizing age distribution and access to finance
+ # Sample PHL Rate by Crop and Region
 library(ggplot2)
 
-ggplot(data, aes(x = Age, fill = HasLoanAccess)) +
-  geom_histogram(binwidth = 2) +
-  labs(title = "Age Distribution and Access to Finance", x = "Age", y = "Count")
+ggplot(data, aes(x = Crop, y = LossRate, fill = Region)) +
+  geom_col(position = "dodge") +
+  labs(title = "Post-Harvest Loss Rate by Crop and Region", x = "Crop", y = "Loss (%)")
 ```
 
-# Farmer Finance Profile
-## Creditworthiness Indicator
+Key insights:
+
+-Tomatoes and leafy vegetables experience highest losses in southern states.
+
+-Loss rates spike during peak rainy seasons due to poor road access and humidity.
+
+-Regions with fewer storage facilities or long market routes show higher PHL.
+
+# PHL Risk Dashboard
+
+## Interactive Map of High-Risk Zones
+
+\[Use leaflet to display regions with highest recorded PHL by crop and season.\]
 
 ```{r}
-# Example scoring or correlation heatmap
-library(corrplot)
-corr_matrix <- cor(data[, c("LoanAmount", "RepaymentRate", "FarmIncome", "TrainingHours")])
-corrplot(corr_matrix, method = "circle")
+library(leaflet)
+
+leaflet(data) %>%
+  addTiles() %>%
+  addCircleMarkers(~longitude, ~latitude,
+                   color = ~phl_color, radius = 5,
+                   popup = ~paste("Crop:", Crop, "<br>", "Loss Rate:", LossRate, "%"))
 
 ```
-Key variables linked to creditworthiness:
 
-Farm size
+## Risk Profile Example
 
-Previous loan repayment record
-
-Farm income & expenses
-
-Access to extension services or training
-
-## Visualization Dashboard (Optional)
-[Embed interactive visualizations using plotly or leaflet]
++------------------------+------------+------------------------+
+| Risk Factor            | Risk Score | Mitigation             |
++========================+============+========================+
+| No cold storage nearby | High       | ColdHub Solar Fridges  |
++------------------------+------------+------------------------+
+| Peak Rainfall Season   | High       | Mobile Drying Stations |
++------------------------+------------+------------------------+
+| > 40Km to Market       | Medium     | Partner with Logistics |
++------------------------+------------+------------------------+
 
 # Predictive Modeling (Bonus)
-## Model Design
+
+## Model: Predicting PHL Risk
 
 ```{r}
-# Sample logistic regression for predicting loan repayment
-model <- glm(RepaymentSuccess ~ Age + FarmSize + Training + Income, data = data, family = "binomial")
-summary(model)
+# Random Forest model to predict PHL likelihood
+library(randomForest)
+
+phl_model <- randomForest(LossRate ~ Crop + Region + Season + DistanceToMarket + StorageType,
+                          data = data, ntree = 100)
+
+print(phl_model)
 
 ```
 
+## Performance Summary
 
-## Model Performance
-Accuracy: XX%
+-   RMSE: XX%
 
-AUC-ROC: XX%
-
-Confusion Matrix:
-
-True Positives: XX
-
-False Positives: XX
-
-etc.
+-   Top Predictors: Crop Type, Season, Storage Access
 
 # Solution Proposal
-## Concept Overview
-We propose a prototype app called "AgriFinanceConnect" which includes:
 
-A loan application portal tailored for young farmers.
+## Concept: **AgriShield Nigeria**
 
-A farmer credit scorecard based on our model.
+An integrated digital platform that:
 
-A dashboard for lenders/investors to filter low-risk candidates.
+-   **Predicts PHL hotspots** using real-time weather, market, and crop data
+
+-   **Connects farmers to ColdHubs** (solar-powered storage)
+
+-   **Links to logistics via APIs** like **Hello Tractor** or local startups
+
+-   Offers a **mobile dashboard** for young farmers to:
+
+```         
+-    Monitor expected spoilage
+
+-    Book cold storage or transport slots
+
+-    View optimal harvest/market times
+```
+
+## Real-World Models to Re-Implement
+
+| Real- World Solution    | Function                                          | Re-Implementation                                          |
+|-------------------------|---------------------------------------------------|------------------------------------------------------------|
+| ColdHubs (Nigeria)      | Solar - powered walk in cold rooms                | Expand via co-op partnerships or youth-owned units         |
+| Twiga Foods (Kenya)     | Digital supply chain, logistics & demand matching | Develop a local app connecting smallholders to bulk buyers |
+| Hello Tractor (Nigeria) | Tractor sharing platform                          | Extend to cold truck or mobile dryer sharing               |
+| Koolboks (Africa)       | Solar freezers with pay-as-you-go                 | Use for high-spoilage zones in fruit & vegetable corridors |
+| AgUnity (Global)        | Blockchain recordkeeping for farmers              | Pilot digital ledgers for PHL tracking and transparency    |
+
+## Impact for Youth
+
+-   Unlocks new agri-business models (e.g., storage-as-a-service).
+
+-   Builds digital skills through mobile app management.
+
+-   Increases profitability and encourages retention in the value chain.
 
 ## Prototype Features (Bonus)
-Educational Tips: "How to Improve Your Credit Score"
 
-SMS reminders for repayment & training modules
+-   **Smallholder version:** SMS interface to book storage or transport
 
-Location-based finance opportunities
+-   **Investor dashboard:** Highlight PHL investment needs by region
 
-## Building Trust
-Our solution builds trust by:
+-   **Farmer education popups:** e.g., “Dry maize to 13% moisture before storing”
 
-Providing transparency through data-backed profiles
+## Conclusion
 
-Reducing perceived risk for lenders using predictive models
-
-Empowering farmers with knowledge and resources
-
-# Conclusion
-By leveraging data analytics, predictive modeling, and user-centered design, this project proposes a scalable, trustworthy pathway to improve financial access for Nigeria’s next generation of agripreneurs.
+By combining predictive analytics, mobile platforms, and logistics innovation, this solution empowers Nigeria’s youth to lead a revolution in agricultural efficiency — reducing waste and turning risk into opportunity.
 
 # References
-EFInA. (2020). Access to Financial Services in Nigeria.
 
-World Bank. (2022). Nigeria Employment Statistics.
+-   FMARD. (2021). **Post-Harvest Losses in Nigeria**.
 
-[Add all other relevant references]
+<!-- -->
+
+-   World Bank. (2022). **Food Loss and Waste Reports**.
+
+<!-- -->
+
+-   ColdHubs. <https://www.coldhubs.com/>
+
+-   Hello Tractor. <https://www.hellotractor.com/>
+
+-   Twiga Foods. <https://www.twigafoods.com/>
+
+-   FAO. (2020). **The State of Food and Agriculture**.
+
+\[Add all other relevant references\]

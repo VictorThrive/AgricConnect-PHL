@@ -2,78 +2,92 @@
   {
     "objectID": "documentation.html",
     "href": "documentation.html",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "title": "Reducing Post-Harvest Losses",
     "section": "",
-    "text": "Access to affordable finance is one of the most pressing barriers limiting youth participation in agriculture in Nigeria. According to the EFInA 2020 survey, only 6% of youth aged 18–25 can access business loans. With agriculture employing about 35% of the workforce yet contributing less than 25% to GDP, it’s evident that underinvestment is a challenge.\nThis project aims to leverage data to bridge the finance gap and develop solutions that make agriculture more bankable and attractive for youth."
+    "text": "Post-harvest losses (PHL) are a critical barrier to food security, economic growth, and youth engagement in Nigeria’s agricultural sector. According to FMARD, 30–50% of perishable produce is lost annually due to inadequate storage, poor logistics, and weak market systems. This amounts to nearly $9 billion in annual losses (World Bank), equivalent to millions of missed meals and missed business opportunities.\nThis project explores how data-driven solutions can be used to predict, prevent, and reduce these losses — turning agriculture into a viable and attractive sector for Nigeria’s youth."
   },
   {
     "objectID": "documentation.html#datasets-used",
     "href": "documentation.html#datasets-used",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "title": "Reducing Post-Harvest Losses",
     "section": "3.1 Datasets Used",
-    "text": "3.1 Datasets Used\n\n\n\nDataset Name\nDescription\nSource\n\n\n\n\n[Dataset 1]\n[Brief Description]\n[Source/Link]\n\n\n[Dataset 2]\n[Brief Description]\n[Source/Link]"
+    "text": "3.1 Datasets Used\n\n\n\n\n\n\n\n\nDataset Name\nDescription\nSource\n\n\n\n\nNASS Crop Production Survey\nProduction and storage patterns by crop\nNational Bureau of Statistics\n\n\nClimate Data\nRegional rainfall and temperature patterns\nNigerian Meteorological Agency (NiMet)\n\n\nFAO Post-Harvest Loss Surveys\nCountry-specific food loss reports\nFAO & World Bank\n\n\nCustom Survey Data\nLosses by crop, region, storage & logistics method\nTeam-designed field survey"
   },
   {
     "objectID": "documentation.html#data-collection-cleaning",
     "href": "documentation.html#data-collection-cleaning",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "title": "Reducing Post-Harvest Losses",
     "section": "3.2 Data Collection & Cleaning",
-    "text": "3.2 Data Collection & Cleaning\n\nData imported from [source or format]\nMissing values handled using [method]\nOutliers and anomalies checked using [techniques]\nFeature engineering applied to variables like loan amount, repayment history, crop type, etc."
+    "text": "3.2 Data Collection & Cleaning\n\nData imported from [source or format]\nSurveyed farmers in 6 geopolitical zones\nIntegrated geospatial data with market distance, road quality, and temperature\nCoded crop type, storage duration, and spoilage cause\nCleaned nulls, standardized seasonal formats, and geotagged records\nMissing values handled using [method]\nOutliers and anomalies checked using [techniques]\nFeature engineering applied to variables like loan amount, repayment history, crop type, etc."
   },
   {
     "objectID": "documentation.html#exploratory-data-analysis-eda",
     "href": "documentation.html#exploratory-data-analysis-eda",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
+    "title": "Reducing Post-Harvest Losses",
     "section": "3.3 Exploratory Data Analysis (EDA)",
-    "text": "3.3 Exploratory Data Analysis (EDA)\n\n# Example: Visualizing age distribution and access to finance\nlibrary(ggplot2)\n\nggplot(data, aes(x = Age, fill = HasLoanAccess)) +\n  geom_histogram(binwidth = 2) +\n  labs(title = \"Age Distribution and Access to Finance\", x = \"Age\", y = \"Count\")"
+    "text": "3.3 Exploratory Data Analysis (EDA)\n\n # Sample PHL Rate by Crop and Region\nlibrary(ggplot2)\n\nggplot(data, aes(x = Crop, y = LossRate, fill = Region)) +\n  geom_col(position = \"dodge\") +\n  labs(title = \"Post-Harvest Loss Rate by Crop and Region\", x = \"Crop\", y = \"Loss (%)\")\n\nKey insights:\n-Tomatoes and leafy vegetables experience highest losses in southern states.\n-Loss rates spike during peak rainy seasons due to poor road access and humidity.\n-Regions with fewer storage facilities or long market routes show higher PHL."
   },
   {
-    "objectID": "documentation.html#creditworthiness-indicator",
-    "href": "documentation.html#creditworthiness-indicator",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
-    "section": "4.1 Creditworthiness Indicator",
-    "text": "4.1 Creditworthiness Indicator\n\n# Example scoring or correlation heatmap\nlibrary(corrplot)\ncorr_matrix &lt;- cor(data[, c(\"LoanAmount\", \"RepaymentRate\", \"FarmIncome\", \"TrainingHours\")])\ncorrplot(corr_matrix, method = \"circle\")\n\nKey variables linked to creditworthiness:\nFarm size\nPrevious loan repayment record\nFarm income & expenses\nAccess to extension services or training"
+    "objectID": "documentation.html#interactive-map-of-high-risk-zones",
+    "href": "documentation.html#interactive-map-of-high-risk-zones",
+    "title": "Reducing Post-Harvest Losses",
+    "section": "4.1 Interactive Map of High-Risk Zones",
+    "text": "4.1 Interactive Map of High-Risk Zones\n[Use leaflet to display regions with highest recorded PHL by crop and season.]\n\nlibrary(leaflet)\n\nleaflet(data) %&gt;%\n  addTiles() %&gt;%\n  addCircleMarkers(~longitude, ~latitude,\n                   color = ~phl_color, radius = 5,\n                   popup = ~paste(\"Crop:\", Crop, \"&lt;br&gt;\", \"Loss Rate:\", LossRate, \"%\"))"
   },
   {
-    "objectID": "documentation.html#visualization-dashboard-optional",
-    "href": "documentation.html#visualization-dashboard-optional",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
-    "section": "4.2 Visualization Dashboard (Optional)",
-    "text": "4.2 Visualization Dashboard (Optional)\n[Embed interactive visualizations using plotly or leaflet]"
+    "objectID": "documentation.html#risk-profile-example",
+    "href": "documentation.html#risk-profile-example",
+    "title": "Reducing Post-Harvest Losses",
+    "section": "4.2 Risk Profile Example",
+    "text": "4.2 Risk Profile Example\n\n\n\n\n\n\n\n\nRisk Factor\nRisk Score\nMitigation\n\n\n\n\nNo cold storage nearby\nHigh\nColdHub Solar Fridges\n\n\nPeak Rainfall Season\nHigh\nMobile Drying Stations\n\n\n\n40Km to Market\n\nMedium\nPartner with Logistics"
   },
   {
-    "objectID": "documentation.html#model-design",
-    "href": "documentation.html#model-design",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
-    "section": "5.1 Model Design",
-    "text": "5.1 Model Design\n\n# Sample logistic regression for predicting loan repayment\nmodel &lt;- glm(RepaymentSuccess ~ Age + FarmSize + Training + Income, data = data, family = \"binomial\")\nsummary(model)"
+    "objectID": "documentation.html#model-predicting-phl-risk",
+    "href": "documentation.html#model-predicting-phl-risk",
+    "title": "Reducing Post-Harvest Losses",
+    "section": "5.1 Model: Predicting PHL Risk",
+    "text": "5.1 Model: Predicting PHL Risk\n\n# Random Forest model to predict PHL likelihood\nlibrary(randomForest)\n\nphl_model &lt;- randomForest(LossRate ~ Crop + Region + Season + DistanceToMarket + StorageType,\n                          data = data, ntree = 100)\n\nprint(phl_model)"
   },
   {
-    "objectID": "documentation.html#model-performance",
-    "href": "documentation.html#model-performance",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
-    "section": "5.2 Model Performance",
-    "text": "5.2 Model Performance\nAccuracy: XX%\nAUC-ROC: XX%\nConfusion Matrix:\nTrue Positives: XX\nFalse Positives: XX\netc."
+    "objectID": "documentation.html#performance-summary",
+    "href": "documentation.html#performance-summary",
+    "title": "Reducing Post-Harvest Losses",
+    "section": "5.2 Performance Summary",
+    "text": "5.2 Performance Summary\n\nRMSE: XX%\nTop Predictors: Crop Type, Season, Storage Access"
   },
   {
-    "objectID": "documentation.html#concept-overview",
-    "href": "documentation.html#concept-overview",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
-    "section": "6.1 Concept Overview",
-    "text": "6.1 Concept Overview\nWe propose a prototype app called “AgriFinanceConnect” which includes:\nA loan application portal tailored for young farmers.\nA farmer credit scorecard based on our model.\nA dashboard for lenders/investors to filter low-risk candidates."
+    "objectID": "documentation.html#concept-agrishield-nigeria",
+    "href": "documentation.html#concept-agrishield-nigeria",
+    "title": "Reducing Post-Harvest Losses",
+    "section": "6.1 Concept: AgriShield Nigeria",
+    "text": "6.1 Concept: AgriShield Nigeria\nAn integrated digital platform that:\n\nPredicts PHL hotspots using real-time weather, market, and crop data\nConnects farmers to ColdHubs (solar-powered storage)\nLinks to logistics via APIs like Hello Tractor or local startups\nOffers a mobile dashboard for young farmers to:\n\n-    Monitor expected spoilage\n\n-    Book cold storage or transport slots\n\n-    View optimal harvest/market times"
+  },
+  {
+    "objectID": "documentation.html#real-world-models-to-re-implement",
+    "href": "documentation.html#real-world-models-to-re-implement",
+    "title": "Reducing Post-Harvest Losses",
+    "section": "6.2 Real-World Models to Re-Implement",
+    "text": "6.2 Real-World Models to Re-Implement\n\n\n\n\n\n\n\n\nReal- World Solution\nFunction\nRe-Implementation\n\n\n\n\nColdHubs (Nigeria)\nSolar - powered walk in cold rooms\nExpand via co-op partnerships or youth-owned units\n\n\nTwiga Foods (Kenya)\nDigital supply chain, logistics & demand matching\nDevelop a local app connecting smallholders to bulk buyers\n\n\nHello Tractor (Nigeria)\nTractor sharing platform\nExtend to cold truck or mobile dryer sharing\n\n\nKoolboks (Africa)\nSolar freezers with pay-as-you-go\nUse for high-spoilage zones in fruit & vegetable corridors\n\n\nAgUnity (Global)\nBlockchain recordkeeping for farmers\nPilot digital ledgers for PHL tracking and transparency"
+  },
+  {
+    "objectID": "documentation.html#impact-for-youth",
+    "href": "documentation.html#impact-for-youth",
+    "title": "Reducing Post-Harvest Losses",
+    "section": "6.3 Impact for Youth",
+    "text": "6.3 Impact for Youth\n\nUnlocks new agri-business models (e.g., storage-as-a-service).\nBuilds digital skills through mobile app management.\nIncreases profitability and encourages retention in the value chain."
   },
   {
     "objectID": "documentation.html#prototype-features-bonus",
     "href": "documentation.html#prototype-features-bonus",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
-    "section": "6.2 Prototype Features (Bonus)",
-    "text": "6.2 Prototype Features (Bonus)\nEducational Tips: “How to Improve Your Credit Score”\nSMS reminders for repayment & training modules\nLocation-based finance opportunities"
+    "title": "Reducing Post-Harvest Losses",
+    "section": "6.4 Prototype Features (Bonus)",
+    "text": "6.4 Prototype Features (Bonus)\n\nSmallholder version: SMS interface to book storage or transport\nInvestor dashboard: Highlight PHL investment needs by region\nFarmer education popups: e.g., “Dry maize to 13% moisture before storing”"
   },
   {
-    "objectID": "documentation.html#building-trust",
-    "href": "documentation.html#building-trust",
-    "title": "Access to Affordable Finance for Young Agripreneurs",
-    "section": "6.3 Building Trust",
-    "text": "6.3 Building Trust\nOur solution builds trust by:\nProviding transparency through data-backed profiles\nReducing perceived risk for lenders using predictive models\nEmpowering farmers with knowledge and resources"
+    "objectID": "documentation.html#conclusion",
+    "href": "documentation.html#conclusion",
+    "title": "Reducing Post-Harvest Losses",
+    "section": "6.5 Conclusion",
+    "text": "6.5 Conclusion\nBy combining predictive analytics, mobile platforms, and logistics innovation, this solution empowers Nigeria’s youth to lead a revolution in agricultural efficiency — reducing waste and turning risk into opportunity."
   }
 ]
