@@ -7,4 +7,3 @@
 
 #ignore all datasets files with .csv and .xlsx in the datesets folder
 *.csv
-*.xlsx
