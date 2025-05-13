@@ -6,4 +6,9 @@
 /.quarto/
 
 #ignore all datasets files with .csv and .xlsx in the datesets folder
+<<<<<<< HEAD
 *.csv
+=======
+# *.csv
+# *.xlsx
+>>>>>>> c099b83 (Replaced the datasets)
