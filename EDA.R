@@ -1,16 +1,3 @@
-install.packages("AzureStor")
-library(AzureStor)
-
-bl_endp_key <- storage_endpoint("https://testblobstorage1o1.blob.core.windows.net", 
-                                key="N2CmXkp/YkhO9ozykV3rzOWwbxYxdB9y8/eMyxmms4IFL9JQ1OwiImysAwfEqEXPwS3FlD2Gnte9+ASttvEaZQ==")
-list_storage_containers(bl_endp_key)
-cont <- storage_container(bl_endp_key, "test")
-list_storage_files(cont)
-
-food_price <- storage_download(cont, "/Processed_latest/food_price.xlsx")
-
-#storage_multiupload(cont, "N:/data/.", "newdir")  # uploading everything in a directory
-
 library(tidyverse)
 library(readxl)
 p_harvest_loss <-  read_excel("new_data/data/post_harvest_losses.xlsx")
