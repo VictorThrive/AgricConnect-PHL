@@ -172,8 +172,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data-strategy" id="toc-data-strategy" class="nav-link" data-scroll-target="#data-strategy"><span class="header-section-number">3</span> Data Strategy</a>
   <ul class="collapse">
   <li><a href="#datasets-used" id="toc-datasets-used" class="nav-link" data-scroll-target="#datasets-used"><span class="header-section-number">3.1</span> Datasets Used</a></li>
-  <li><a href="#data-collection-cleaning" id="toc-data-collection-cleaning" class="nav-link" data-scroll-target="#data-collection-cleaning"><span class="header-section-number">3.2</span> Data Collection &amp; Cleaning</a></li>
-  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda"><span class="header-section-number">3.3</span> Exploratory Data Analysis (EDA)</a></li>
+  <li><a href="#dataset-summary-table" id="toc-dataset-summary-table" class="nav-link" data-scroll-target="#dataset-summary-table"><span class="header-section-number">3.2</span> Dataset Summary Table</a></li>
+  <li><a href="#data-collection-cleaning" id="toc-data-collection-cleaning" class="nav-link" data-scroll-target="#data-collection-cleaning"><span class="header-section-number">3.3</span> Data Collection &amp; Cleaning</a></li>
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda"><span class="header-section-number">3.4</span> Exploratory Data Analysis (EDA)</a></li>
   </ul></li>
   <li><a href="#phl-risk-dashboard" id="toc-phl-risk-dashboard" class="nav-link" data-scroll-target="#phl-risk-dashboard"><span class="header-section-number">4</span> PHL Risk Dashboard</a>
   <ul class="collapse">
@@ -244,58 +245,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="3"><span class="header-section-number">3</span> Data Strategy</h1>
 <section id="datasets-used" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="datasets-used"><span class="header-section-number">3.1</span> Datasets Used</h2>
+<p>This document provides an overview of datasets related to post-harvest losses, food prices, logistics, market access, and population dynamics in Nigeria. All datasets are stored in Excel format and compiled from multiple credible sources.</p>
+</section>
+<section id="dataset-summary-table" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="dataset-summary-table"><span class="header-section-number">3.2</span> Dataset Summary Table</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 42%">
-<col style="width: 32%">
+<col style="width: 9%">
+<col style="width: 43%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Dataset Name</th>
-<th>Description</th>
-<th>Source</th>
+<th><strong>Dataset Name</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Source</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>NASS Crop Production Survey</td>
-<td>Production and storage patterns by crop</td>
-<td>National Bureau of Statistics</td>
+<td><strong>Post-Harvest Loss Dataset</strong></td>
+<td>Data on post-harvest loss amounts (in tonnes), percentage of production lost, food price impacts, logistics factors, and production volumes.</td>
+<td>FAOSTAT 2017, The Herald, AfricaCheck36, World Bank Open Data, UN Population Prospects, WRI CAIT Climate Data Explorer, FAO et al (2019), WB Calculations</td>
 </tr>
 <tr class="even">
-<td>Climate Data</td>
-<td>Regional rainfall and temperature patterns</td>
-<td>Nigerian Meteorological Agency (NiMet)</td>
+<td><strong>Food Price Dataset</strong></td>
+<td>Data on food price levels, variations by crop, and economic implications of post-harvest losses.</td>
+<td>World Bank Open Data, The Herald</td>
 </tr>
 <tr class="odd">
-<td>FAO Post-Harvest Loss Surveys</td>
-<td>Country-specific food loss reports</td>
-<td>FAO &amp; World Bank</td>
+<td><strong>Logistics Dataset</strong></td>
+<td>Data on storage and transportation capacity (in tonnes) and losses due to poor infrastructure.</td>
+<td>AfricaCheck36, FAOSTAT 2017</td>
 </tr>
 <tr class="even">
-<td>Custom Survey Data</td>
-<td>Losses by crop, region, storage &amp; logistics method</td>
-<td>Team-designed field survey</td>
+<td><strong>Market Dataset</strong></td>
+<td>Information on market accessibility, regional trade flows, and volumes affected by post-harvest losses.</td>
+<td>World Bank Open Data, FAOSTAT</td>
+</tr>
+<tr class="odd">
+<td><strong>Population Dataset</strong></td>
+<td>Data on current population, food insecurity prevalence (44%), and projections (50% increase by 2050).</td>
+<td>UN Population Prospects, World Bank Open Data</td>
+</tr>
+<tr class="even">
+<td><strong>Other dataset</strong></td>
+<td>These includes combined metrics based on crop type, population</td>
+<td>FAO Food Loss and Waste Platform, HarvestChoice SPAM, Harvard Dataverse</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="data-collection-cleaning" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="data-collection-cleaning"><span class="header-section-number">3.2</span> Data Collection &amp; Cleaning</h2>
+<section id="data-collection-cleaning" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="data-collection-cleaning"><span class="header-section-number">3.3</span> Data Collection &amp; Cleaning</h2>
 <ul>
-<li>Data imported from [source or format]</li>
-<li>Surveyed farmers in 6 geopolitical zones</li>
+<li>Data were downloaded from source and imported</li>
 <li>Integrated geospatial data with market distance, road quality, and temperature</li>
-<li>Coded crop type, storage duration, and spoilage cause</li>
+<li>Variable names were cleaned and rensme e.g crop type, storage duration, and spoilage cause</li>
 <li>Cleaned nulls, standardized seasonal formats, and geotagged records</li>
-<li>Missing values handled using [method]</li>
-<li>Outliers and anomalies checked using [techniques]</li>
-<li>Feature engineering applied to variables like loan amount, repayment history, crop type, etc.</li>
+<li>Missing values handled were left as missing as they are less than 5% of the data</li>
 </ul>
 </section>
-<section id="exploratory-data-analysis-eda" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="exploratory-data-analysis-eda"><span class="header-section-number">3.3</span> Exploratory Data Analysis (EDA)</h2>
+<section id="exploratory-data-analysis-eda" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="exploratory-data-analysis-eda"><span class="header-section-number">3.4</span> Exploratory Data Analysis (EDA)</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># Sample PHL Rate by Crop and Region</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>

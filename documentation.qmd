@@ -33,42 +33,57 @@ To develop an intelligent system that:
 
 ## Datasets Used
 
-| Dataset Name                  | Description                                        | Source                                 |
-|-------------------------------|----------------------------------------------------|----------------------------------------|
-| NASS Crop Production Survey   | Production and storage patterns by crop            | National Bureau of Statistics          |
-| Climate Data                  | Regional rainfall and temperature patterns         | Nigerian Meteorological Agency (NiMet) |
-| FAO Post-Harvest Loss Surveys | Country-specific food loss reports                 | FAO & World Bank                       |
-| Custom Survey Data            | Losses by crop, region, storage & logistics method | Team-designed field survey             |
+This section provides overview of datasets related to post-harvest losses, food prices, logistics, market access, and population dynamics in Nigeria. All datasets are stored in Excel format and compiled from multiple credible sources.
+
+## Dataset Summary Table
+
++-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Dataset Name**              | **Description**                                                                                                                              | **Source**                                                                                                                                                |
++===============================+==============================================================================================================================================+===========================================================================================================================================================+
+| **Post-Harvest Loss Dataset** | Data on post-harvest loss amounts (in tonnes), percentage of production lost, food price impacts, logistics factors, and production volumes. | FAOSTAT 2017, The Herald, AfricaCheck36, World Bank Open Data, UN Population Prospects, WRI CAIT Climate Data Explorer, FAO et al (2019), WB Calculations |
++-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Food Price Dataset**        | Data on food price levels, variations by crop, and economic implications of post-harvest losses.                                             | World Bank Open Data, The Herald                                                                                                                          |
++-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Logistics Dataset**         | Data on storage and transportation capacity (in tonnes) and losses due to poor infrastructure.                                               | AfricaCheck36, FAOSTAT 2017                                                                                                                               |
++-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Market Dataset**            | Information on market accessibility, regional trade flows, and volumes affected by post-harvest losses.                                      | World Bank Open Data, FAOSTAT                                                                                                                             |
++-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Population Dataset**        | Data on current population, food insecurity prevalence (44%), and projections (50% increase by 2050).                                        | UN Population Prospects, World Bank Open Data                                                                                                             |
++-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Other dataset**             | These includes combined metrics based on crop type, population                                                                               | FAO Food Loss and Waste Platform, HarvestChoice SPAM, Harvard Dataverse                                                                                   |
++-------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ## Data Collection & Cleaning
 
--   Data imported from \[source or format\]
--   Surveyed farmers in 6 geopolitical zones
--   Integrated geospatial data with market distance, road quality, and temperature
--   Coded crop type, storage duration, and spoilage cause
--   Cleaned nulls, standardized seasonal formats, and geotagged records
--   Missing values handled using \[method\]
--   Outliers and anomalies checked using \[techniques\]
--   Feature engineering applied to variables like loan amount, repayment history, crop type, etc.
+-   Data were downloaded from source and imported
+-   Variable names were cleaned and rensme e.g crop type, storage duration, and spoilage cause
+-   Cleaned nulls, reshape wide format data with Python and R
+-   Missing values were left as missing as they are less than 5% of the data
 
 ## Exploratory Data Analysis (EDA)
 
 ```{r}
- # Sample PHL Rate by Crop and Region
-library(ggplot2)
-
-ggplot(data, aes(x = Crop, y = LossRate, fill = Region)) +
-  geom_col(position = "dodge") +
-  labs(title = "Post-Harvest Loss Rate by Crop and Region", x = "Crop", y = "Loss (%)")
+ df_cleaned <- data_list[[2]] %>%
+    mutate(
+      date = mdy(date), # Convert date to a Date type
+      market_id = as.numeric(market_id), # Convert market_id to numeric
+      latitude = as.numeric(latitude),   # Convert latitude to numeric
+      longitude = as.numeric(longitude),  # Convert longitude to numeric
+      `price(NGN)` = as.numeric(`price(NGN)`), # Convert price(NGN) to numeric
+      `price(USD)` = as.numeric(`price(USD)`)  # Convert price(USD) to numeric
+    )
+  
+  
+  # Major Insight Example for Logistics
+  data_list[[2]] %>%
+    group_by(State) %>%
+    mutate(`price(NGN)` = as.numeric(gsub("[^0-9.]", "", `price(NGN)`))) %>% # Remove non-numeric characters except decimal point
+    summarise(Avg_Price = mean(`price(NGN)`, na.rm = TRUE))
 ```
 
 Key insights:
 
--Tomatoes and leafy vegetables experience highest losses in southern states.
-
--Loss rates spike during peak rainy seasons due to poor road access and humidity.
-
--Regions with fewer storage facilities or long market routes show higher PHL.
+Analyzing post-harvest losses in Nigeria reveals that states like Kaduna and Katsina face the biggest challenges in preserving their produce. However, it's interesting to see that high losses don't always translate to high market prices. For instance, Benue manages lower losses but isn't a leader in pricing, while Sokoto's unusually low prices and Abia's high ones highlight the complex interplay of factors like market access and demand that truly shape the agricultural value chain beyond just how much is lost after harvest.
 
 # PHL Risk Dashboard
 
@@ -89,15 +104,15 @@ leaflet(data) %>%
 
 ## Risk Profile Example
 
-+------------------------+------------+------------------------+
-| Risk Factor            | Risk Score | Mitigation             |
-+========================+============+========================+
-| No cold storage nearby | High       | ColdHub Solar Fridges  |
-+------------------------+------------+------------------------+
-| Peak Rainfall Season   | High       | Mobile Drying Stations |
-+------------------------+------------+------------------------+
-| > 40Km to Market       | Medium     | Partner with Logistics |
-+------------------------+------------+------------------------+
++------------------------+----------------+------------------------+
+| Risk Factor            | Risk Score     | Mitigation             |
++========================+================+========================+
+| No cold storage nearby | High           | ColdHub Solar Fridges  |
++------------------------+----------------+------------------------+
+| Peak Rainfall Season   | High           | Mobile Drying Stations |
++------------------------+----------------+------------------------+
+| > 40Km to Market       | Medium         | Partner with Logistics |
++------------------------+----------------+------------------------+
 
 # Predictive Modeling (Bonus)
 
@@ -144,13 +159,19 @@ An integrated digital platform that:
 
 ## Real-World Models to Re-Implement
 
++-------------------------+---------------------------------------------------+------------------------------------------------------------+
 | Real- World Solution    | Function                                          | Re-Implementation                                          |
-|-------------------------|---------------------------------------------------|------------------------------------------------------------|
++=========================+===================================================+============================================================+
 | ColdHubs (Nigeria)      | Solar - powered walk in cold rooms                | Expand via co-op partnerships or youth-owned units         |
++-------------------------+---------------------------------------------------+------------------------------------------------------------+
 | Twiga Foods (Kenya)     | Digital supply chain, logistics & demand matching | Develop a local app connecting smallholders to bulk buyers |
++-------------------------+---------------------------------------------------+------------------------------------------------------------+
 | Hello Tractor (Nigeria) | Tractor sharing platform                          | Extend to cold truck or mobile dryer sharing               |
++-------------------------+---------------------------------------------------+------------------------------------------------------------+
 | Koolboks (Africa)       | Solar freezers with pay-as-you-go                 | Use for high-spoilage zones in fruit & vegetable corridors |
++-------------------------+---------------------------------------------------+------------------------------------------------------------+
 | AgUnity (Global)        | Blockchain recordkeeping for farmers              | Pilot digital ledgers for PHL tracking and transparency    |
++-------------------------+---------------------------------------------------+------------------------------------------------------------+
 
 ## Impact for Youth
 
