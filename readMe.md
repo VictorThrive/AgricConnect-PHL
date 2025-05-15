@@ -1,10 +1,3 @@
----
-title: "AgricConnect-PHL"
-author: "Data Rangers"
-date: "2025-05-15"
-output: html_document
----
-
 ## Project Overview: Tackling Post-Harvest Losses in Nigeria
 
 ![](images/clipboard-2256623036.png){width="696"}
